@@ -1,0 +1,16 @@
+version: '3'
+services:
+    web: 
+       build: ../CleaningBot.Web
+      context: .
+      dockerfile: ../CleaningBot.Web.Dockerfile
+        ports:
+            - "5000:80"
+      
+  database:
+    image: "postgres" 
+    env_file:
+      - database.env 
+    volumes:
+      - ./init.sql
+      - database-data:/var/lib/postgresql/data/ 
