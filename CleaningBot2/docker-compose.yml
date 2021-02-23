@@ -1,0 +1,17 @@
+﻿# docker-compose.yml
+version: '3'
+services:
+    web: 
+       build: ../CleaningBot.Web
+      context: .
+      dockerfile: ../CleaningBot.Web.Dockerfile
+        ports:
+            - "5000:80"
+      
+  database:
+    image: "postgres" # use latest official postgres version
+    env_file:
+      - database.env # configure postgres
+    volumes:
+      - ./init.sql
+      - database-data:/var/lib/postgresql/data/ 
